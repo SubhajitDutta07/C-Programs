@@ -179,6 +179,6 @@ void remove_from_end(node **root){
     }
     temp->next = NULL ; 
     free(curr);
-    
+        
 }
 
