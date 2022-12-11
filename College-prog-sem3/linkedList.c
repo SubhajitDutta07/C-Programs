@@ -12,6 +12,9 @@ void insert_end();
 void deallocate();
 void insert_at_beginning();
 void insert_after();
+void remove_element();
+void remove_from_beginning();
+void remove_from_end();
 
 void main(){
     // node *root = malloc(sizeof(node)); 
@@ -30,6 +33,10 @@ void main(){
     insert_after(&root,6,3);
     insert_after(&root,15,5);
     insert_after(&root,25,1);
+    insert_at_beginning(&root, -11);
+    remove_element(&root,15);
+    remove_from_beginning(&root);
+    remove_from_end(&root);
 
     node *curr = root;
     // while(curr != NULL){        // while loop for traversal 
@@ -84,7 +91,7 @@ void insert_at_beginning(node **root, int x){
     newNode->data = x;
     newNode-> next = *root;
     if(newNode == NULL){
-        return ; 
+        exit(1) ; 
     }
     if(*root == NULL){
         *root = newNode; 
@@ -99,7 +106,7 @@ void insert_at_beginning(node **root, int x){
 void insert_after(node **root,int x,int pos){
     node *newNode = malloc(sizeof(node));
     if(newNode == NULL){
-        return ; 
+        exit(1) ; 
     }
     newNode->data = x;
     if(pos == 1){
@@ -124,3 +131,53 @@ void insert_after(node **root,int x,int pos){
 
 }
 
+void remove_element(node **root, int x){
+    if(*root == NULL)
+        return;
+    
+    if((*root)->data == x){
+        node *temp = *root;
+        *root = (*root)->next;
+        free(temp);
+        return; 
+    }
+
+    for( node *curr = *root; curr->next != NULL;curr = curr->next){
+        if(curr->next->data == x){
+            node *temp = curr->next;
+            curr->next = curr->next->next;
+            free(temp); 
+            remove ; 
+        }
+    }
+}
+
+void remove_from_beginning(node **root){
+    if(*root == NULL){
+        return ; 
+    }
+    node *temp = *root;
+    *root = (*root)->next;
+    free(temp);
+}
+
+void remove_from_end(node **root){
+
+    node *temp;
+    node *curr = *root ;
+    if((*root)==NULL)
+        return;
+
+    if((*root)->next == NULL){
+        *root = NULL;
+        return ;
+    }
+    while (curr->next != NULL)
+    {
+        temp = curr;
+        curr = curr->next ;
+    }
+    temp->next = NULL ; 
+    free(curr);
+    
+}
