@@ -168,7 +168,7 @@ void remove_from_end(node **root){
     if((*root)==NULL)
         return;
 
-    if((*root)->next == NULL){
+    if((*root)->next == NULL){  
         *root = NULL;
         return ;
     }
@@ -181,3 +181,4 @@ void remove_from_end(node **root){
     free(curr);
     
 }
+
