@@ -50,6 +50,7 @@ void main(){
         printf("%d \n", curr->data);
     }
 
+    printf("\n");
     reverse(&root);
 
     for (curr = root;curr != NULL; curr = curr->next) 
