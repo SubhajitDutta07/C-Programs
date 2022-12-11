@@ -29,6 +29,7 @@ void main(){
     insert_at_beginning(&root, -2);
     insert_after(&root,6,3);
     insert_after(&root,15,5);
+    insert_after(&root,25,1);
 
     node *curr = root;
     // while(curr != NULL){        // while loop for traversal 
@@ -75,6 +76,9 @@ void deallocate(node **root){  // freeing the linkesLIst as a whole
     *root = NULL ;
 }
 
+
+
+
 void insert_at_beginning(node **root, int x){
     node *newNode = malloc(sizeof(node));
     newNode->data = x;
@@ -90,12 +94,20 @@ void insert_at_beginning(node **root, int x){
 
 }
 
+
+
 void insert_after(node **root,int x,int pos){
     node *newNode = malloc(sizeof(node));
     if(newNode == NULL){
         return ; 
     }
     newNode->data = x;
+    if(pos == 1){
+        insert_at_beginning(root,x);
+        return;
+    }
+    if(pos < 0)
+        return;
     if(*root == NULL){
         *root = newNode;
         return ; 
@@ -111,3 +123,4 @@ void insert_after(node **root,int x,int pos){
    curr->next = newNode;
 
 }
+
