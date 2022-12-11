@@ -16,6 +16,7 @@ void remove_element();
 void remove_from_beginning();
 void remove_from_end();
 void reverse();
+int has_loop();
 
 void main(){
     // node *root = malloc(sizeof(node)); 
@@ -56,6 +57,13 @@ void main(){
     for (curr = root;curr != NULL; curr = curr->next) 
     {
         printf("%d \n", curr->data);
+    }
+
+    if(has_loop(&root)==1){
+        printf("It is a cyclic linkedList \n");
+    }
+    else {
+        printf("It is not a cyclic LinkedList \n");
     }
       
     deallocate(&root);
@@ -203,4 +211,20 @@ void reverse(node **root){
     }
 
     *root = prev;
+}
+
+int has_loop(node **root){
+    node *slow = *root;
+    node *fast = *root;
+
+    while (slow != NULL && fast != NULL && fast -> next != NULL ){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast){
+            return 1;
+        }
+    }
+
+    return 0;
 }
