@@ -15,6 +15,7 @@ void insert_after();
 void remove_element();
 void remove_from_beginning();
 void remove_from_end();
+void reverse();
 
 void main(){
     // node *root = malloc(sizeof(node)); 
@@ -45,6 +46,13 @@ void main(){
     // }
 
     for (curr = root;curr != NULL; curr = curr->next)  // for loop for traversal 
+    {
+        printf("%d \n", curr->data);
+    }
+
+    reverse(&root);
+
+    for (curr = root;curr != NULL; curr = curr->next) 
     {
         printf("%d \n", curr->data);
     }
@@ -182,3 +190,16 @@ void remove_from_end(node **root){
 
 }
 
+void reverse(node **root){
+    node *curr = *root;
+    node *prev = NULL;
+
+    while(curr != NULL){
+        node *next= curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    *root = prev;
+}
