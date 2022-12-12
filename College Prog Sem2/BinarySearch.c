@@ -25,7 +25,6 @@ int main(void)
     int result = binarySearch(arr, 0, length - 1, target);
     (result == -1)
         ? printf("Element is not present in array")
-        : printf("Element is present at indetarget
-     %d", result);
+        : printf("Element is present at indetarget %d \n", result);
     return 0;
 }
