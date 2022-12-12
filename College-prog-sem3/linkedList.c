@@ -91,6 +91,9 @@ void insert_end(node **root,int x){
 }
 
 void deallocate(node **root){  // freeing the linkesLIst as a whole
+    if((*root)==NULL){
+        return;
+    }
     node *curr = *root;
     while(curr != NULL){
         node *temp = curr;

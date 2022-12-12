@@ -100,6 +100,9 @@ void display(node **root){
 }
 
 void deallocate(node **root){
+    if((*root)== NULL){
+        return;
+    }
     node *curr = *root;
     while(curr != NULL){
         node *temp = curr;
