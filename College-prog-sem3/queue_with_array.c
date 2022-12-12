@@ -38,17 +38,17 @@ void main(){
 }
 
 void enqueue(){
-    if(front == l){
+    if(rear == (l-1)){
         printf("Queue is full \n");
         return;
     }
     int x;
     printf("Enter the element to be inserted \n");
     scanf("%d",&x);
-    if(front ==-1){
+    if(front ==-1 && rear == -1){
         front++;
         rear++;
-        queue[front]= x;
+        queue[rear]= x;
         return;
     }
     rear++;
@@ -60,6 +60,11 @@ void dequeue(){
     if(front==-1 || rear ==-1){
         printf("Queue is empty \n");
         return;
+    }
+    if(front == rear ){
+        printf("deleted element is : %d \n",queue[front]);
+        front = -1;
+        rear = -1;
     }
     queue[front]=0;
     front++;
@@ -84,3 +89,54 @@ void display(){
     }
     printf("\n");
 }
+
+// for circular queue
+void enqueue(int x){
+    if(front == -1 || rear == -1){
+        front ++;
+        rear++;
+        queue[rear] = x;    
+    }
+    else if((rear +1)%l == front){
+        printf("Queue is full\n");
+        return;
+    }
+    else {
+        rear = (rear+1)%l;
+        queue[rear]=x;
+    }
+    
+}
+
+void dequeue(int x){
+    if(front == -1 || rear == -1){
+        printf("Queue is empty \n");
+        return;
+    }
+    else if(front == rear){
+        printf("deleted element is : %d\n", queue[rear]);
+        front =-1;
+        rear =-1;
+    }
+    else{
+        printf("deleted element is : %d\n",queue[front]);
+        front = (front+1)%l;
+    }
+}
+
+void disply(){
+    if(front == -1 || rear ==-1){
+        printf("Queue is empty \n");
+        return;
+    }
+    else{
+        int i = front;
+        while(i!=rear){
+            printf("%d\n",queue[i]);
+            i = (i+1)%l;
+        }
+        printf("%d\n",queue[rear]);
+    }
+}
+
+// till this it is circular queue
