@@ -15,25 +15,40 @@ void deallocate();
 
 void main(){
     struct node *root = NULL; 
+    int ch,c;
 
-    push(&root,7);
-    push(&root,10);
-    push(&root,3);
-    display(&root);
-    push(&root,56);
-    push(&root,89);
-    peek(&root);
-    display(&root);
-    pop(&root);
-    pop(&root);
-    peek(&root);
-    display(&root);
+   do{
+        printf("enter your choice \n");
+        printf("1. Push \n 2. Pop \n 3. Peek \n 4. Display \n 5. Exit\n");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:push(&root);     
+            break;
+        case 2:pop(&root);
+            break;
+        case 3: peek(&root);
+            break;
+        case 4 : display(&root);
+            break;
+        case 5: exit(1);
+            break;
+        default: printf("WRONG CHOICE !!");
+            break;
+        }
+        printf("Do you want to continue if yes then press 1 \n");
+        printf("Do you want to continue if no then press 0 \n");
+        scanf("%d", &c);
+    }while(c==1);
 
     deallocate(&root);
 
 }
 
-void push(node **root, int value){
+void push(node **root){
+    int value = 0;
+    printf("Enter an element to be inserted \n");
+    scanf("%d", &value);
     node *newNode;
     newNode = malloc(sizeof(node));
     newNode->data = value;
@@ -75,6 +90,7 @@ void display(node **root){
         printf("the stack is emepty\n");
         return;
     }
+    printf("\n \n");
     node *curr = *root;
     while(curr!= NULL){
         printf("%d \n", curr->data);
