@@ -21,9 +21,10 @@ void main(){
     insert_at_beginning(&head,&tail,5);
     insert_at_beginning(&head,&tail,3);
     insert_at_beginning(&head,&tail,1);
-    insert_at_end(&head,&tail,99);
-    insert_at_end(&head,&tail,80);
-    insert_at_pos_from_start(&head,&tail,6,6);
+    insert_at_end(&head,&tail,9);
+    insert_at_end(&head,&tail,11);
+    insert_at_pos_from_start(&head,&tail,6,4);
+    insert_at_pos_from_start(&head,&tail,7,5);
 
 
     node *curr = head;   // *curr = tail to traverse in reverse
