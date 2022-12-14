@@ -14,7 +14,7 @@ void insert_at_end();
 void insert_at_pos_from_start();
 void remove_from_beginning();
 void remove_from_end();
-
+void remove_using_pos();
 
 void main(){
 
@@ -30,6 +30,7 @@ void main(){
     insert_at_pos_from_start(&head,&tail,7,5);
     remove_from_beginning(&head);
     remove_from_end(&head,&tail);
+    remove_using_pos(&head,&tail,2);
 
     
 
@@ -49,12 +50,38 @@ void main(){
     return;
 }
 
+void remove_using_pos(node **head,node **tail,int pos){ 
+    if(*head == NULL){
+        printf("Deletion not possible, List is empty \n");
+        return;
+    }
+    if(pos == 1){
+        remove_from_beginning(&(*head));
+        return;
+    }
+    int c=0;
+    node *curr = *head;
+    while(c < (pos-1)){
+        curr = curr->next;
+        c++;
+    }
+    if(curr == (*tail)){
+        remove_from_end(&(*head), &(*tail));
+        return;
+    }
+    curr->prev->next = curr->next;
+    curr->next->prev = curr->prev;
+    free(curr);
+    return;
+
+}
+
 void remove_from_end(node **head,node **tail){
     if((*tail) == NULL){
         printf("LinkedList is empty\n");
     }
     if((*tail)->prev == NULL){
-        printf("LinkedList is empty now, it had one element that has been removed\n");
+        printf("LinkedList is empty now,the removed element is %d \n",(*head)->data);
         *tail = NULL;
         return;
     }
@@ -70,7 +97,7 @@ void remove_from_beginning(node **head){
     }
     if((*head)-> next == NULL){
         *head = NULL;           //doing this because if we free the head here it may be possible that it can contain garbage value therefore giving an exception
-       printf("LinkedList is empty now, it had one element that has been removed\n");
+       printf("LinkedList is empty now,the removed element is %d \n",(*head)->data);
         return;
     }
     node *curr = *head;
