@@ -12,6 +12,9 @@ void insert_at_beginning();
 void init ();
 void insert_at_end();
 void insert_at_pos_from_start();
+void remove_from_beginning();
+void remove_from_end();
+
 
 void main(){
 
@@ -24,9 +27,17 @@ void main(){
     insert_at_end(&head,&tail,9);
     insert_at_end(&head,&tail,11);
     insert_at_pos_from_start(&head,&tail,6,4);
-    //insert_at_pos_from_start(&head,&tail,7,5);
+    insert_at_pos_from_start(&head,&tail,7,5);
+    remove_from_beginning(&head);
+    remove_from_end(&head,&tail);
 
+    
 
+    if(head == NULL || tail == NULL){       //checking this because if not then head might contain some garbage value which will give an exception and thus while deallocating and printing it will give segmentation fault
+        free(head);
+        free(tail);
+        return;
+    }
     node *curr = head;   // *curr = tail to traverse in reverse
     while(curr !=  NULL){
         printf("%d\n", curr->data);
@@ -36,6 +47,36 @@ void main(){
     deallocate(&head,&tail);
 
     return;
+}
+
+void remove_from_end(node **head,node **tail){
+    if((*tail) == NULL){
+        printf("LinkedList is empty\n");
+    }
+    if((*tail)->prev == NULL){
+        printf("LinkedList is empty now, it had one element that has been removed\n");
+        *tail = NULL;
+        return;
+    }
+    *tail = (*tail)->prev;
+    free((*tail)->next);
+    (*tail)->next = NULL;
+}
+
+void remove_from_beginning(node **head){
+    if((*head) == NULL){
+        printf("LinkedList is already empty\n");
+        return;
+    }
+    if((*head)-> next == NULL){
+        *head = NULL;           //doing this because if we free the head here it may be possible that it can contain garbage value therefore giving an exception
+       printf("LinkedList is empty now, it had one element that has been removed\n");
+        return;
+    }
+    node *curr = *head;
+    (*head)= (*head)->next;
+    (*head)->prev = NULL;
+    free(curr);
 }
 
 void insert_at_pos_from_start(node **head, node **tail, int x, int pos){
