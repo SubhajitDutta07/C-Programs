@@ -67,12 +67,12 @@ void dequeue(node **front){
         printf("Queue is empty \n");
         return;
     }
-    if(((*front)->next)==NULL){
+    printf("The deleted element is %d \n", (*front)->data);
+    if((*front)->next==NULL){
         free(*front);
         return;
     }
     node *temp= *front;
-    printf("The deleted element is %d \n", (*front)->data);
     *front = (*front)->next;
     free(temp);
 }
