@@ -14,38 +14,36 @@ void deallocate();
 void display();
 
 void main(){
-    struct node *root = NULL; 
+    struct node *front = NULL; 
+    struct node *rear = NULL;
     int ch,c;
 
-   do{
+   while(1){
         printf("enter your choice \n");
         printf("1. Enqueue \n2. Dequeue \n3.Peek \n4. Display \n5. Exit\n");
         scanf("%d", &ch);
         switch (ch)
         {
-        case 1:enqueue(&root);     
+        case 1:enqueue(&front,&rear);     
             break;
-        case 2:dequeue(&root);
+        case 2:dequeue(&front);
             break;
-        case 3: peek(&root);
+        case 3: peek(&front);
             break;
-        case 4 : display(&root);
+        case 4 : display(&front);
             break;
         case 5: exit(1);
             break;
         default: printf("WRONG CHOICE !!");
             break;
         }
-        printf("Do you want to continue if yes then press 1 \n");
-        printf("Do you want to continue if no then press 0 \n");
-        scanf("%d", &c);
-    }while(c==1);
+    }
 
-    deallocate(&root);
+    deallocate(&front, &rear);
 
 }
 
-void enqueue(node **root){
+void enqueue(node **front, node **rear){
     node *newNode = malloc(sizeof(node));
     if(newNode == NULL){
         exit(1);
@@ -55,60 +53,60 @@ void enqueue(node **root){
     scanf("%d", &x);
     newNode->next = NULL;
     newNode->data = x;
-    if((*root)==NULL){
-        *root=newNode;
+    if((*front)==NULL){
+        *front = newNode;
+        *rear = newNode;
         return;
     }
-    node *curr= *root;
-    while(curr->next != NULL){
-        curr=curr->next;
-    }
-    curr->next = newNode;
+    (*rear)->next = newNode;
+    *rear = newNode;
 }
 
-void dequeue(node **root){
-    if((*root)==NULL){
+void dequeue(node **front){
+    if((*front)==NULL){
         printf("Queue is empty \n");
         return;
     }
-    if(((*root)->next)==NULL){
-        free(*root);
+    printf("The deleted element is %d \n", (*front)->data);
+    if((*front)->next==NULL){
+        free(*front);
+        *front = NULL;
         return;
     }
-    node *temp= *root;
-    printf("The deleted element is %d \n", (*root)->data);
-    *root = (*root)->next;
+    node *temp= *front;
+    *front = (*front)->next;
     free(temp);
 }
 
-void peek(node **root){
-    if((*root)==NULL){
+void peek(node **front){
+    if((*front)==NULL){
         printf("Queue is empty \n");
         return;
     }
-    printf("Peek value is : %d\n", (*root)->data);
+    printf("Peek value is : %d\n", (*front)->data);
 }
 
-void display(node **root){
-    if((*root)== NULL){
+void display(node **front){
+    if((*front)== NULL){
         printf("Queue is empty\n");
         return;
     }
     printf("\n");
-    for(node *curr = *root; curr!= NULL;curr = curr->next){
+    for(node *curr = *front; curr!= NULL;curr = curr->next){
         printf("%d\n", curr->data);
     }
 }
 
-void deallocate(node **root){
-    if((*root)==NULL){
+void deallocate(node **front, node **rear){
+    if((*front)==NULL){
         return;
     }
-    node *curr = *root;
+    node *curr = *front;
     while(curr!=NULL){
         node *temp = curr;
         curr = curr->next;
         free(temp);
     }
-    *root = NULL;
+    *front = NULL;
+    *rear = NULL;
 }
