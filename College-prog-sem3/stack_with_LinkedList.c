@@ -69,10 +69,17 @@ void pop(node **root){
         printf("Underflow Condition\n");
         return;
     }
+    if((*root)->next == NULL){
+        printf("poped data is %d \n", (*root)->data);
+        *root = NULL;
+        printf("Stack is empty now \n");
+        return ;
+    }
     node *temp = *root;
     printf("poped data is %d \n", (*root)->data);
     *root = (*root)->next;
     free(temp);
+    return ; 
 }
 
 void peek(node **root){

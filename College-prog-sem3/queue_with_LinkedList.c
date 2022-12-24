@@ -70,6 +70,7 @@ void dequeue(node **front){
     printf("The deleted element is %d \n", (*front)->data);
     if((*front)->next==NULL){
         free(*front);
+        *front = NULL;
         return;
     }
     node *temp= *front;
