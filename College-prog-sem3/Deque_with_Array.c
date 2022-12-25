@@ -154,17 +154,20 @@ void peekFront(){
 }
 
 void displayFromEnd(){
-    // int i;
-    // if(front == -1 && rear == -1){
-    //     printf("Queue is empty \n");
-    //     return; 
-    // }
-    // for(i=rear;i!= front;i=(i-1)%l){
-    //     printf("%d  ", dequeue[i]);
-    // }
-    // printf("%d  ", dequeue[i]);
-    // printf("\n");
-    // return;
+    int i=rear;
+    if(front == -1 && rear == -1){
+        printf("Queue is empty \n");
+        return; 
+    }
+    while(i!= front){
+        if(i < 0){
+            i = l-1;
+        }
+        printf("%d ", dequeue[i]);
+        i= (i-1)%l;
+    }
+    printf("%d  \n", dequeue[i]);
+    return;
 }
 
 void displayFromBeginning(){
