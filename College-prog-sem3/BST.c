@@ -11,6 +11,7 @@ node* insert();
 void inorder();
 node* deleteNode();
 node* inorderSuccessor();
+node* search();
 
 
 void main(){
@@ -95,4 +96,16 @@ node* inorderSuccessor(node *root){
         curr = curr->left;
     }
     return curr;
+}
+
+node* search(node *root, int x){
+    if(root == NULL || root->data == x){
+        return root ;
+    }
+    if(x > root->data){
+        return search(root->right , x);
+    }
+    if(x < root->data){
+        return search(root->left, x);
+    }
 }
