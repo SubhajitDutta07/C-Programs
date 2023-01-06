@@ -27,6 +27,9 @@ void main(){
 
 node *create(){
     node *newNode = malloc(sizeof(node));
+    if(newNode == NULL){
+        exit(1);
+    }
     int x;
     printf("Enter the data to be inserted  or enter -1 to no new node \n");
     scanf("%d", &x);
