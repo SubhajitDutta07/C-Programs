@@ -10,6 +10,14 @@ class cars{
         int ModelNo ;
         list<string> Features;
 
+        // default constructor but has initialized on ur needs
+        cars(){
+            Name="Something";
+            Model="Something";
+            ModelNo=0;
+        }
+
+        //parametarized constructor 
         cars(string name, string model, int modelNo){
             Name = name;
             Model = model ; 
