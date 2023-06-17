@@ -34,7 +34,7 @@ class cars{
 };
 
 class Company : public cars {  
-// we r inheriting the class "cars" and keeping the public sections of the base class as public for the child class as well
+// we r inheriting the class "cars" and keeping the public sections of the base class as public for the derived class as well
     public:
         Company(string name, string model):cars(name,model){
 
@@ -42,7 +42,7 @@ class Company : public cars {
 
         void modes(){       // we cannot access this funtion from an object created from the base class
             cout<<Name <<" : " << Model << " Modes: Sports , Eco , Adventure" << endl;
-            // by turning the Name and Model variable under protected section allows us to access it int derived class as well
+            // by turning the Name and Model variable under protected section allows us to access it in derived class as well
         }
 
 };
